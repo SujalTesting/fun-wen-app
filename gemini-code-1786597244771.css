@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+/* Floating background hearts */
+.background-hearts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 30px 25px;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(230, 57, 70, 0.2);
+  text-align: center;
+  max-width: 450px;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.stage {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.stage.active {
+  display: flex;
+}
+
+img {
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  color: #d62828;
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+.sub-text {
+  color: #4a4a4a;
+  font-size: 0.95rem;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 60px;
+}
+
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#yesBtn {
+  background-color: #2a9d8f;
+  color: white;
+  box-shadow: 0 4px 12px rgba(42, 157, 143, 0.3);
+  z-index: 2;
+}
+
+#yesBtn:hover {
+  background-color: #218376;
+}
+
+#noBtn {
+  background-color: #e63946;
+  color: white;
+  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+  position: absolute;
+  right: 15%;
+  transition: all 0.15s ease-out;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.option-btn {
+  background: #fff0f3;
+  color: #c9184a;
+  border: 2px solid #ffb3c1;
+  padding: 10px;
+  font-size: 0.9rem;
+  border-radius: 12px;
+}
+
+.option-btn.selected {
+  background: #ff4d6d;
+  color: white;
+  border-color: #ff4d6d;
+}
+
+.primary-btn {
+  background-color: #d62828;
+  color: white;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.love-meter-container {
+  width: 100%;
+  margin: 15px 0;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: #ff4d6d;
+  cursor: pointer;
+}
+
+.final-card {
+  background: #fff0f3;
+  padding: 15px;
+  border-radius: 15px;
+  border: 2px dashed #ff4d6d;
+  margin-top: 10px;
+  animation: popIn 0.4s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
