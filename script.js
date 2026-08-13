@@ -12,10 +12,10 @@ const teaseMessages = [
 
 // Cute GIFs for each dodge attempt
 const dodgeGifs = [
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHY5ZjVrd2I0OGxrbnl4b3p4eTNxbXRwNDVraDF5MnFxdnVzOWg1eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L95234bOKJ6fDjyGL6/giphy.gif",
-  "https://media.giphy.com/media/3o7TKoWXm3okO1kgHC/giphy.gif",
-  "https://media.giphy.com/media/BEob506687u3C/giphy.gif",
-  "https://media.giphy.com/media/ISOckXUvpEy6c/giphy.gif"
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3djFiNDVucWxsZG1weTY3dmx1eXdkYmNqeDc4MW9kaGRjMGV4ZmM3NCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/XU5FEFsUuql8fLaFJ1/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBkZmo1Z3Znam1sbDZ0bGQzM3hlMXY0MWcya3JqOGVtdGljMXo2diZlcD12MV9naWZzX3NlYXJjaCZjdD1n/1vZeoJWjQfpOymFCKF/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBkZmo1Z3Znam1sbDZ0bGQzM3hlMXY0MWcya3JqOGVtdGljMXo2diZlcD12MV9naWZzX3NlYXJjaCZjdD1n/1msDUtCpBk1BihoOGD/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTBwbzAzejRmeTdqaW11emU3NHZiM3hpcGlzdDk0bGUxODFpZWVnZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o6EQ8Z1teWoBswtLa/giphy.gif"
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
