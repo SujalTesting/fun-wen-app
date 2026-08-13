@@ -11,10 +11,10 @@ const teaseMessages = [
 
 // Direct working Tenor GIF CDN URLs
 const dodgeGifs = [
-  "https://media.tenor.com/gU212Jy334AAAAAC/milk-and-mocha-hug.gif",
-  "https://media.tenor.com/ef301E03hX8AAAAC/bear-hug.gif",
-  "https://media.tenor.com/2vA6YQvHnL4AAAAC/milk-and-mocha-kiss.gif",
-  "https://media.tenor.com/x881k_M3_EAAAAAC/milk-and-mocha-bear.gif"
+"https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHY5ZjVrd2I0OGxrbnl4b3p4eTNxbXRwNDVraDF5MnFxdnVzOWg1eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L95234bOKJ6fDjyGL6/giphy.gif",
+  "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3N2cml1a2pydmsya3o1bXgwbGF3cTFxOXlyMnV3ZW1rcmkyYTNzZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKoWXm3okO1kgHC/giphy.gif",
+  "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGNva2Qxa25tYWVydmI3N2EwbzlxNWx1NG01czVjNzN1dXU1dTh4NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BEob506687u3C/giphy.gif",
+  "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZsdTh2dTBqOHJhNHlyeHhhaDYzOWg3ZXJhOW9xMm1tNHIxdDByOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ISOckXUvpEy6c/giphy.gif"
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
