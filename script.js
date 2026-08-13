@@ -12,6 +12,73 @@ const teaseMessages = [
 // Emoji swapped on each dodge — no network request, so it can never break or 404
 const dodgeEmojis = ["🙈", "😅", "😜", "🏃‍♀️", "😂"];
 
+// --- "Love Fever" background song (Rajneesh Patel), controlled via YouTube IFrame API ---
+// Swap this ID for a different official upload any time — everything else keeps working.
+const SONG_VIDEO_ID = "7sJXzaN3RqI";
+
+let ytPlayer = null;
+let ytPlayerReady = false;
+let songShouldPlay = false; // set true when Yes is clicked, even if player isn't ready yet
+let songHasStopped = false; // true once the meter hits 100, so it never restarts by accident
+let isMuted = false;
+
+// Called automatically by the YouTube IFrame API once it finishes loading
+function onYouTubeIframeAPIReady() {
+  ytPlayer = new YT.Player("ytPlayer", {
+    height: "1",
+    width: "1",
+    videoId: SONG_VIDEO_ID,
+    playerVars: {
+      autoplay: 0,
+      controls: 0,
+      disablekb: 1,
+      fs: 0,
+      modestbranding: 1,
+      playsinline: 1,
+    },
+    events: {
+      onReady: () => {
+        ytPlayerReady = true;
+        if (songShouldPlay) {
+          ytPlayer.playVideo();
+        }
+      },
+    },
+  });
+}
+
+function startSong() {
+  songShouldPlay = true;
+  songHasStopped = false;
+  if (ytPlayerReady && ytPlayer) {
+    ytPlayer.playVideo();
+  }
+  // If the API hasn't finished loading yet, onReady() above will start it
+  // automatically because songShouldPlay is now true.
+}
+
+function stopSong() {
+  songShouldPlay = false;
+  songHasStopped = true;
+  if (ytPlayerReady && ytPlayer) {
+    ytPlayer.pauseVideo();
+  }
+}
+
+function toggleMusicMute() {
+  const btn = document.getElementById("musicToggle");
+  if (!ytPlayerReady || !ytPlayer) return;
+
+  isMuted = !isMuted;
+  if (isMuted) {
+    ytPlayer.mute();
+    if (btn) btn.textContent = "🔇";
+  } else {
+    ytPlayer.unMute();
+    if (btn) btn.textContent = "🔊";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const noBtn = document.getElementById("noBtn");
 
@@ -22,6 +89,11 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       moveNoButton();
     }, { passive: false });
+  }
+
+  const musicToggle = document.getElementById("musicToggle");
+  if (musicToggle) {
+    musicToggle.addEventListener("click", toggleMusicMute);
   }
 
   createBackgroundHearts();
@@ -79,6 +151,9 @@ function handleYesClick() {
     confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
   }
 
+  // This click is real user interaction, so the browser allows sound to start here
+  startSong();
+
   document.getElementById("stage1").classList.remove("active");
   document.getElementById("stage2").classList.add("active");
 }
@@ -118,6 +193,10 @@ function updateLoveMeter(val) {
 
     if (typeof confetti === "function") {
       confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
+    }
+
+    if (Number(val) >= 100 && !songHasStopped) {
+      stopSong();
     }
   }
 }
