@@ -1,7 +1,6 @@
 let dodgeCount = 0;
-let yesButtonScale = 0.5;
+let yesButtonScale = 1;
 
-// Marathi-English tease messages when she tries to click "No"
 const teaseMessages = [
   "Arey re, 'No' click nahi honar! 😜",
   "Aga Shona, evdha bhaav nako khau! 😘",
@@ -10,23 +9,20 @@ const teaseMessages = [
   "Bas kar na pillu, Seedha 'HO' bol! ❤️"
 ];
 
-// Cute GIFs for each dodge attempt
+// Direct working Giphy CDN URLs (No 404/Not Available errors)
 const dodgeGifs = [
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3djFiNDVucWxsZG1weTY3dmx1eXdkYmNqeDc4MW9kaGRjMGV4ZmM3NCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/XU5FEFsUuql8fLaFJ1/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBkZmo1Z3Znam1sbDZ0bGQzM3hlMXY0MWcya3JqOGVtdGljMXo2diZlcD12MV9naWZzX3NlYXJjaCZjdD1n/1vZeoJWjQfpOymFCKF/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBkZmo1Z3Znam1sbDZ0bGQzM3hlMXY0MWcya3JqOGVtdGljMXo2diZlcD12MV9naWZzX3NlYXJjaCZjdD1n/1msDUtCpBk1BihoOGD/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTBwbzAzejRmeTdqaW11emU3NHZiM3hpcGlzdDk0bGUxODFpZWVnZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o6EQ8Z1teWoBswtLa/giphy.gif"
+  "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHY5ZjVrd2I0OGxrbnl4b3p4eTNxbXRwNDVraDF5MnFxdnVzOWg1eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L95234bOKJ6fDjyGL6/giphy.gif",
+  "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3N2cml1a2pydmsya3o1bXgwbGF3cTFxOXlyMnV3ZW1rcmkyYTNzZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKoWXm3okO1kgHC/giphy.gif",
+  "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGNva2Qxa25tYWVydmI3N2EwbzlxNWx1NG01czVjNzN1dXU1dTh4NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BEob506687u3C/giphy.gif",
+  "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZsdTh2dTBqOHJhNHlyeHhhaDYzOWg3ZXJhOW9xMm1tNHIxdDByOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ISOckXUvpEy6c/giphy.gif"
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
   const noBtn = document.getElementById("noBtn");
 
   if (noBtn) {
-    // Desktop hover & click dodging
     noBtn.addEventListener("mouseover", moveNoButton);
     noBtn.addEventListener("click", moveNoButton);
-
-    // Mobile touch dodging
     noBtn.addEventListener("touchstart", (e) => {
       e.preventDefault();
       moveNoButton();
@@ -36,54 +32,47 @@ document.addEventListener("DOMContentLoaded", () => {
   createBackgroundHearts();
 });
 
-// Precision Dodge Function
+// Strictly keeps dodging contained within card bounds so it doesn't leave screen
 function moveNoButton() {
   const noBtn = document.getElementById("noBtn");
   const yesBtn = document.getElementById("yesBtn");
   const subText = document.getElementById("subText");
   const mainGif = document.getElementById("mainGif");
+  const card = document.getElementById("mainCard");
 
-  if (!noBtn) return;
+  if (!noBtn || !card) return;
 
-  // Trigger slight mobile haptic vibration if supported
-  if (navigator.vibrate) {
-    navigator.vibrate(50);
-  }
-
-  // Calculate safe viewport boundaries with padding
-  const padding = 20;
+  // Calculate dodge relative to the inner dimensions of the white card
+  const cardRect = card.getBoundingClientRect();
   const btnWidth = noBtn.offsetWidth || 100;
   const btnHeight = noBtn.offsetHeight || 45;
 
-  const maxX = window.innerWidth - btnWidth - padding;
-  const maxY = window.innerHeight - btnHeight - padding;
+  const maxX = cardRect.width - btnWidth - 30;
+  const maxY = cardRect.height - btnHeight - 30;
 
-  const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
-  const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+  // Random relative position inside the card container
+  const randomX = Math.max(15, Math.floor(Math.random() * maxX));
+  const randomY = Math.max(15, Math.floor(Math.random() * maxY));
 
-  noBtn.style.position = "fixed";
+  noBtn.style.position = "absolute";
   noBtn.style.left = `${randomX}px`;
   noBtn.style.top = `${randomY}px`;
-  noBtn.style.zIndex = "9999";
 
-  // Update text & GIF with small bump animation
   if (subText) {
-    subText.style.color = "#c9184a";
     subText.innerText = teaseMessages[dodgeCount % teaseMessages.length];
   }
   if (mainGif) {
     mainGif.src = dodgeGifs[dodgeCount % dodgeGifs.length];
   }
 
-  // Scale up "Yes" button progressively
+  // Grow "Yes" button
   dodgeCount++;
-  yesButtonScale = Math.min(yesButtonScale + 0.12, 1.9); // Cap max growth scale
+  yesButtonScale = Math.min(yesButtonScale + 0.1, 1.8);
   if (yesBtn) {
     yesBtn.style.transform = `scale(${yesButtonScale})`;
   }
 }
 
-// Stage 1 -> Stage 2 Transition
 function handleYesClick() {
   if (typeof confetti === "function") {
     confetti({
@@ -93,19 +82,10 @@ function handleYesClick() {
     });
   }
 
-  // Smooth stage transition
-  const stage1 = document.getElementById("stage1");
-  const stage2 = document.getElementById("stage2");
-
-  stage1.classList.remove("active");
-  setTimeout(() => {
-    stage1.classList.add("hidden");
-    stage2.classList.remove("hidden");
-    setTimeout(() => stage2.classList.add("active"), 50);
-  }, 300);
+  document.getElementById("stage1").classList.remove("active");
+  document.getElementById("stage2").classList.add("active");
 }
 
-// Option Selection in Date Planner
 function selectOption(button, optionName) {
   const allOptions = document.querySelectorAll(".option-btn");
   allOptions.forEach(btn => btn.classList.remove("selected"));
@@ -117,20 +97,11 @@ function selectOption(button, optionName) {
   }
 }
 
-// Stage 2 -> Stage 3 Transition
 function goToStage3() {
-  const stage2 = document.getElementById("stage2");
-  const stage3 = document.getElementById("stage3");
-
-  stage2.classList.remove("active");
-  setTimeout(() => {
-    stage2.classList.add("hidden");
-    stage3.classList.remove("hidden");
-    setTimeout(() => stage3.classList.add("active"), 50);
-  }, 300);
+  document.getElementById("stage2").classList.remove("active");
+  document.getElementById("stage3").classList.add("active");
 }
 
-// Interactive Love Slider Logic
 function updateLoveMeter(val) {
   const sliderText = document.getElementById("sliderValueText");
   const finalCard = document.getElementById("finalCard");
@@ -151,7 +122,6 @@ function updateLoveMeter(val) {
   }
 }
 
-// Background Floating Hearts
 function createBackgroundHearts() {
   const container = document.getElementById("heartsContainer");
   if (!container) return;
