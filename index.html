@@ -19,6 +19,26 @@
   <button id="musicToggle" class="music-toggle" aria-label="Mute or unmute music" title="Mute/unmute">🔊</button>
 
   <div class="card" id="mainCard">
+
+    <!-- GENERATOR SCREEN (Shown only if no names are in the link) -->
+    <div id="generatorStage" class="stage hidden">
+      <span style="font-size: 3rem;">💌</span>
+      <h2>Create a Valentine Prank!</h2>
+      <p class="sub-text">Enter names to generate a customized proposal link:</p>
+
+      <div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+        <input type="text" id="senderInput" placeholder="Your Name (e.g., Tobey)" style="padding: 12px; border-radius: 12px; border: 1.5px solid #ffccd5; outline: none; font-size: 0.95rem; text-align: center;" />
+        <input type="text" id="receiverInput" placeholder="Her Name (e.g., Jasmine)" style="padding: 12px; border-radius: 12px; border: 1.5px solid #ffccd5; outline: none; font-size: 0.95rem; text-align: center;" />
+        <button class="primary-btn" onclick="generateAndShareLink()">Create & Share Link 🚀</button>
+      </div>
+
+      <div id="shareBox" class="hidden" style="margin-top: 12px; width: 100%;">
+        <p style="font-size: 0.85rem; color: #2a9d8f; font-weight: bold;">Link Created! Send it to her:</p>
+        <input type="text" id="generatedUrl" readonly style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #ccc; margin: 6px 0; font-size: 0.8rem; text-align: center;" />
+        <button id="whatsappBtn" style="background: #25D366; color: white; padding: 10px 16px; border-radius: 12px; width: 100%; font-size: 0.9rem; cursor: pointer; border: none;">Share via WhatsApp 💬</button>
+      </div>
+    </div>
+
     <!-- STAGE 1: PROPOSAL -->
     <div id="stage1" class="stage active">
       <div class="emoji-card">
@@ -31,6 +51,7 @@
         <button id="noBtn">Nako (No) 🙈</button>
       </div>
     </div>
+
     <!-- STAGE 2: DATE PLANNER -->
     <div id="stage2" class="stage">
       <div class="emoji-card">
@@ -49,6 +70,7 @@
       </div>
       <button id="nextStageBtn" class="primary-btn hidden" onclick="goToStage3()">Next Surprise ✨</button>
     </div>
+
     <!-- STAGE 3: LOVE METER -->
     <div id="stage3" class="stage">
       <div class="emoji-card">
@@ -65,6 +87,7 @@
         <p>Tu maza saglyat aavadta manus aahes. Can't wait to see you soon! 😘</p>
       </div>
     </div>
+
   </div>
   <script src="script.js"></script>
 </body>
