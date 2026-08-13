@@ -16,19 +16,19 @@
   <div class="card" id="mainCard">
     <!-- STAGE 1: THE PROPOSAL -->
     <div id="stage1" class="stage active">
-      <img id="mainGif" src="https://media.giphy.com/media/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute Gif" />
+      <img id="mainGif" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHY5ZjVrd2I0OGxrbnl4b3p4eTNxbXRwNDVraDF5MnFxdnVzOWg1eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L95234bOKJ6fDjyGL6/giphy.gif" alt="Cute Gif" />
       <h1 id="questionText">Arey Pilla, Will you be my Valentine? 💖</h1>
       <p id="subText" class="sub-text">Tu khup god aahes! Don't even try to say no... 😉</p>
 
-      <div class="btn-group">
+      <div class="btn-group" id="btnGroup">
         <button id="yesBtn" onclick="handleYesClick()">Ho! (YES) 🥰</button>
-        <button id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()">Nako (No) 🙈</button>
+        <button id="noBtn">Nako (No) 🙈</button>
       </div>
     </div>
 
     <!-- STAGE 2: CELEBRATION & DATE PLANNER -->
-    <div id="stage2" class="stage">
-      <img src="https://media.giphy.com/media/26hpU4aO1CBy3fLpe/giphy.gif" alt="Happy Gif" />
+    <div id="stage2" class="stage hidden">
+      <img src="https://media.tenor.com/gU212Jy334AAAAAC/milk-and-mocha-hug.gif" alt="Happy Gif" />
       <h2>Yay! Mala mahit hota tu 'HO' bolnar! 🎉❤️</h2>
       <p class="sub-text">Best decision ever, *Aga Shona*! Now let's plan our dream date...</p>
 
@@ -46,8 +46,8 @@
     </div>
 
     <!-- STAGE 3: LOVE METER & FINAL NOTE -->
-    <div id="stage3" class="stage">
-      <img src="https://media.giphy.com/media/LpDmM2WXO5Gf2PNgvM/giphy.gif" alt="Love Gif" />
+    <div id="stage3" class="stage hidden">
+      <img src="https://media.tenor.com/ef301E03hX8AAAAC/bear-hug.gif" alt="Love Gif" />
       <h2>Maza Prem Inspector 🔍</h2>
       <p class="sub-text">How much do you love me? Adjust the slider below!</p>
 
