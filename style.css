@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,6 +7,7 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   user-select: none;
 }
+
 body {
   background: radial-gradient(circle at 50% 10%, #ffdde1 0%, #ee9ca7 100%);
   min-height: 100vh;
@@ -16,6 +18,7 @@ body {
   padding: 16px;
   position: relative;
 }
+
 .background-hearts {
   position: absolute;
   top: 0;
@@ -25,16 +28,19 @@ body {
   pointer-events: none;
   z-index: 0;
 }
+
 .heart {
   position: absolute;
   font-size: 1.2rem;
   opacity: 0.7;
   animation: floatUp 5s linear infinite;
 }
+
 @keyframes floatUp {
   0% { transform: translateY(105vh) scale(0.6); opacity: 0.8; }
   100% { transform: translateY(-10vh) scale(1.3); opacity: 0; }
 }
+
 .card {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(16px);
@@ -48,6 +54,7 @@ body {
   z-index: 1;
   position: relative;
 }
+
 /* Stage display control */
 .stage {
   display: none;
@@ -55,9 +62,11 @@ body {
   align-items: center;
   gap: 14px;
 }
+
 .stage.active {
   display: flex !important;
 }
+
 .emoji-card {
   width: 150px;
   height: 150px;
@@ -70,30 +79,36 @@ body {
   justify-content: center;
   overflow: hidden;
 }
+
 .emoji-char {
   font-size: 5rem;
   line-height: 1;
   display: inline-block;
   animation: emojiPulse 1.8s ease-in-out infinite;
 }
+
 @keyframes emojiPulse {
   0%, 100% { transform: scale(1) rotate(0deg); }
   50% { transform: scale(1.08) rotate(-3deg); }
 }
+
 .emoji-char.wiggle {
   animation: emojiWiggle 0.4s ease;
 }
+
 @keyframes emojiWiggle {
   0%, 100% { transform: rotate(0deg) scale(1); }
   25% { transform: rotate(-12deg) scale(1.1); }
   75% { transform: rotate(12deg) scale(1.1); }
 }
+
 h1, h2 {
   color: #c9184a;
   font-size: 1.35rem;
   font-weight: 800;
   line-height: 1.3;
 }
+
 .sub-text {
   color: #594a4e;
   font-size: 0.9rem;
@@ -103,6 +118,7 @@ h1, h2 {
   align-items: center;
   justify-content: center;
 }
+
 /* Proper side-by-side button layout */
 .btn-group {
   display: flex;
@@ -114,6 +130,7 @@ h1, h2 {
   min-height: 60px;
   position: relative;
 }
+
 button {
   border: none;
   border-radius: 50px;
@@ -123,6 +140,7 @@ button {
   outline: none;
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
+
 #yesBtn {
   background: linear-gradient(135deg, #2a9d8f 0%, #218376 100%);
   color: #ffffff;
@@ -131,6 +149,7 @@ button {
   z-index: 2;
   position: relative;
 }
+
 #noBtn {
   background: linear-gradient(135deg, #ff4d6d 0%, #c9184a 100%);
   color: #ffffff;
@@ -140,20 +159,24 @@ button {
   position: relative;
   touch-action: none;
 }
+
 .date-planner {
   width: 100%;
 }
+
 .date-planner h3 {
   font-size: 0.95rem;
   color: #4a4a4a;
   margin-bottom: 8px;
 }
+
 .options-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
   width: 100%;
 }
+
 .option-btn {
   background: #fff0f3;
   color: #a4133c;
@@ -164,11 +187,13 @@ button {
   width: 100%;
   text-align: center;
 }
+
 .option-btn.selected {
   background: linear-gradient(135deg, #ff4d6d 0%, #c9184a 100%);
   color: #ffffff;
   border-color: transparent;
 }
+
 .primary-btn {
   background: linear-gradient(135deg, #ff4d6d 0%, #c9184a 100%);
   color: white;
@@ -177,15 +202,18 @@ button {
   border-radius: 14px;
   margin-top: 10px;
 }
+
 .love-meter-container {
   width: 100%;
   margin: 10px 0;
 }
+
 input[type="range"] {
   width: 100%;
   height: 8px;
   accent-color: #ff4d6d;
 }
+
 .final-card {
   background: #fff0f3;
   padding: 15px;
@@ -193,12 +221,32 @@ input[type="range"] {
   border: 2px dashed #ff4d6d;
   margin-top: 8px;
 }
+
+/* Generator Form Custom Styles */
+#generatorStage input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1.5px solid #ffccd5;
+  outline: none;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+#shareBox {
+  margin-top: 15px;
+  width: 100%;
+  background: #fff0f3;
+  padding: 14px;
+  border-radius: 16px;
+  border: 2px dashed #ff4d6d;
+}
+
 .hidden {
   display: none !important;
 }
 
-/* YouTube audio player kept off-screen but not display:none, so audio
-   isn't throttled by the browser */
+/* YouTube audio player */
 #ytPlayerWrap {
   position: fixed;
   width: 1px;
