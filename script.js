@@ -89,6 +89,17 @@ function toggleMusicMute() {
 
 // 2. Inject Dynamic Names into HTML text elements when page loads
 document.addEventListener("DOMContentLoaded", () => {
+  const hasReceiver = urlParams.has('receiver') || urlParams.has('to');
+  const generatorStage = document.getElementById("generatorStage");
+  const stage1 = document.getElementById("stage1");
+
+  // If NO receiver parameter exists in URL, show Generator Screen
+  if (!hasReceiver && generatorStage && stage1) {
+    stage1.classList.remove("active");
+    stage1.classList.add("hidden");
+    generatorStage.classList.remove("hidden");
+    generatorStage.classList.add("active");
+  }
   // Personalize Stage 1 Text
   const questionText = document.getElementById("questionText");
   if (questionText) {
