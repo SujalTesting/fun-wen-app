@@ -9,13 +9,8 @@ const teaseMessages = [
   "Bas kar na pillu, Seedha 'HO' bol! ❤️"
 ];
 
-// Direct working Tenor GIF CDN URLs
-const dodgeGifs = [
-"https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHY5ZjVrd2I0OGxrbnl4b3p4eTNxbXRwNDVraDF5MnFxdnVzOWg1eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L95234bOKJ6fDjyGL6/giphy.gif",
-  "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3N2cml1a2pydmsya3o1bXgwbGF3cTFxOXlyMnV3ZW1rcmkyYTNzZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKoWXm3okO1kgHC/giphy.gif",
-  "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGNva2Qxa25tYWVydmI3N2EwbzlxNWx1NG01czVjNzN1dXU1dTh4NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BEob506687u3C/giphy.gif",
-  "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZsdTh2dTBqOHJhNHlyeHhhaDYzOWg3ZXJhOW9xMm1tNHIxdDByOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ISOckXUvpEy6c/giphy.gif"
-];
+// Emoji swapped on each dodge — no network request, so it can never break or 404
+const dodgeEmojis = ["🙈", "😅", "😜", "🏃‍♀️", "😂"];
 
 document.addEventListener("DOMContentLoaded", () => {
   const noBtn = document.getElementById("noBtn");
@@ -37,7 +32,7 @@ function moveNoButton() {
   const noBtn = document.getElementById("noBtn");
   const yesBtn = document.getElementById("yesBtn");
   const subText = document.getElementById("subText");
-  const mainGif = document.getElementById("mainGif");
+  const emojiChar = document.getElementById("mainEmojiChar");
   const btnGroup = document.getElementById("btnGroup");
 
   if (!noBtn || !btnGroup) return;
@@ -63,8 +58,12 @@ function moveNoButton() {
   if (subText) {
     subText.innerText = teaseMessages[dodgeCount % teaseMessages.length];
   }
-  if (mainGif) {
-    mainGif.src = dodgeGifs[dodgeCount % dodgeGifs.length];
+  if (emojiChar) {
+    emojiChar.textContent = dodgeEmojis[dodgeCount % dodgeEmojis.length];
+    // retrigger the wiggle animation each dodge
+    emojiChar.classList.remove("wiggle");
+    void emojiChar.offsetWidth; // force reflow so the animation restarts
+    emojiChar.classList.add("wiggle");
   }
 
   dodgeCount++;

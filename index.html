@@ -8,28 +8,27 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-
   <div class="background-hearts" id="heartsContainer"></div>
-
   <div class="card" id="mainCard">
     <!-- STAGE 1: PROPOSAL -->
     <div id="stage1" class="stage active">
-      <img id="mainGif" src="https://media.tenor.com/gU212Jy334AAAAAC/milk-and-mocha-hug.gif" alt="Cute Bear" />
+      <div class="emoji-card">
+        <span class="emoji-char" id="mainEmojiChar">💖</span>
+      </div>
       <h1 id="questionText">Arey Pilla, Will you be my Valentine? 💖</h1>
       <p id="subText" class="sub-text">Tu khup god aahes! Don't even try to say no... 😉</p>
-
       <div class="btn-group" id="btnGroup">
         <button id="yesBtn" onclick="handleYesClick()">Ho! (YES) 🥰</button>
         <button id="noBtn">Nako (No) 🙈</button>
       </div>
     </div>
-
     <!-- STAGE 2: DATE PLANNER -->
     <div id="stage2" class="stage">
-      <img src="https://media.tenor.com/ef301E03hX8AAAAC/bear-hug.gif" alt="Happy Bear" />
+      <div class="emoji-card">
+        <span class="emoji-char">🥳</span>
+      </div>
       <h2>Yay! Mala mahit hota tu 'HO' bolnar! 🎉❤️</h2>
       <p class="sub-text">Best decision ever, *Aga Shona*! Now let's plan our dream date...</p>
-
       <div class="date-planner">
         <h3>Pick our Valentine Date Vibe:</h3>
         <div class="options-grid">
@@ -39,28 +38,25 @@
           <button class="option-btn" onclick="selectOption(this, 'Cozy Movie Night')">Cozy Movie Night 🍿🎬</button>
         </div>
       </div>
-
       <button id="nextStageBtn" class="primary-btn hidden" onclick="goToStage3()">Next Surprise ✨</button>
     </div>
-
     <!-- STAGE 3: LOVE METER -->
     <div id="stage3" class="stage">
-      <img src="https://media.tenor.com/2vA6YQvHnL4AAAAC/milk-and-mocha-kiss.gif" alt="Love Bear" />
+      <div class="emoji-card">
+        <span class="emoji-char">💋</span>
+      </div>
       <h2>Maza Prem Inspector 🔍</h2>
       <p class="sub-text">How much do you love me? Adjust the slider below!</p>
-
       <div class="love-meter-container">
         <input type="range" id="loveSlider" min="1" max="100" value="50" oninput="updateLoveMeter(this.value)" />
         <p id="sliderValueText">Love Level: 50% (Thoda aur badhao, itna sa bas? 😜)</p>
       </div>
-
       <div class="final-card hidden" id="finalCard">
         <h3>1000% Approved! 💘</h3>
         <p>Tu maza saglyat aavadta manus aahes. Can't wait to see you soon! 😘</p>
       </div>
     </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
