@@ -1,9 +1,9 @@
 let dodgeCount = 0;
-let yesButtonScale = 1;
+let yesButtonScale = 0.5;
 
 // Marathi-English tease messages when she tries to click "No"
 const teaseMessages = [
-  "Arey re, 'No' work clicking allow nahi aahe! 😜",
+  "Arey re, 'No' click nahi honar! 😜",
   "Aga Shona, evdha bhaav nako khau! 😘",
   "Khup taagad lavli tari 'No' nahi honar! 😂",
   "Chukun pan 'No' dabayla jashil tar button palel! 🏃‍♀️",
@@ -18,39 +18,45 @@ const dodgeGifs = [
   "https://media.giphy.com/media/ISOckXUvpEy6c/giphy.gif"
 ];
 
-// Run setup after page loads completely
 document.addEventListener("DOMContentLoaded", () => {
   const noBtn = document.getElementById("noBtn");
-  
+
   if (noBtn) {
-    // Desktop hover & click
+    // Desktop hover & click dodging
     noBtn.addEventListener("mouseover", moveNoButton);
     noBtn.addEventListener("click", moveNoButton);
-    
-    // Mobile touch support
+
+    // Mobile touch dodging
     noBtn.addEventListener("touchstart", (e) => {
-      e.preventDefault(); // Prevents actual touch click
+      e.preventDefault();
       moveNoButton();
-    });
+    }, { passive: false });
   }
 
   createBackgroundHearts();
 });
 
-// Teleport "No" button & increase "Yes" button size
+// Precision Dodge Function
 function moveNoButton() {
   const noBtn = document.getElementById("noBtn");
   const yesBtn = document.getElementById("yesBtn");
   const subText = document.getElementById("subText");
   const mainGif = document.getElementById("mainGif");
-  const card = document.getElementById("mainCard");
 
-  if (!noBtn || !card) return;
+  if (!noBtn) return;
 
-  // Make sure button uses fixed positioning within viewport padding
+  // Trigger slight mobile haptic vibration if supported
+  if (navigator.vibrate) {
+    navigator.vibrate(50);
+  }
+
+  // Calculate safe viewport boundaries with padding
   const padding = 20;
-  const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-  const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+  const btnWidth = noBtn.offsetWidth || 100;
+  const btnHeight = noBtn.offsetHeight || 45;
+
+  const maxX = window.innerWidth - btnWidth - padding;
+  const maxY = window.innerHeight - btnHeight - padding;
 
   const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
   const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
@@ -58,30 +64,45 @@ function moveNoButton() {
   noBtn.style.position = "fixed";
   noBtn.style.left = `${randomX}px`;
   noBtn.style.top = `${randomY}px`;
-  noBtn.style.zIndex = "999";
+  noBtn.style.zIndex = "9999";
 
-  // Update teasers & GIF
-  if (subText) subText.innerText = teaseMessages[dodgeCount % teaseMessages.length];
-  if (mainGif) mainGif.src = dodgeGifs[dodgeCount % dodgeGifs.length];
+  // Update text & GIF with small bump animation
+  if (subText) {
+    subText.style.color = "#c9184a";
+    subText.innerText = teaseMessages[dodgeCount % teaseMessages.length];
+  }
+  if (mainGif) {
+    mainGif.src = dodgeGifs[dodgeCount % dodgeGifs.length];
+  }
 
-  // Grow "Yes" button slowly
+  // Scale up "Yes" button progressively
   dodgeCount++;
-  yesButtonScale += 0.12;
-  if (yesBtn) yesBtn.style.transform = `scale(${yesButtonScale})`;
+  yesButtonScale = Math.min(yesButtonScale + 0.12, 2.2); // Cap max growth scale
+  if (yesBtn) {
+    yesBtn.style.transform = `scale(${yesButtonScale})`;
+  }
 }
 
-// Trigger Confetti and Go to Stage 2
+// Stage 1 -> Stage 2 Transition
 function handleYesClick() {
   if (typeof confetti === "function") {
     confetti({
       particleCount: 120,
-      spread: 80,
+      spread: 90,
       origin: { y: 0.6 }
     });
   }
 
-  document.getElementById("stage1").classList.remove("active");
-  document.getElementById("stage2").classList.add("active");
+  // Smooth stage transition
+  const stage1 = document.getElementById("stage1");
+  const stage2 = document.getElementById("stage2");
+
+  stage1.classList.remove("active");
+  setTimeout(() => {
+    stage1.classList.add("hidden");
+    stage2.classList.remove("hidden");
+    setTimeout(() => stage2.classList.add("active"), 50);
+  }, 300);
 }
 
 // Option Selection in Date Planner
@@ -90,12 +111,23 @@ function selectOption(button, optionName) {
   allOptions.forEach(btn => btn.classList.remove("selected"));
   button.classList.add("selected");
 
-  document.getElementById("nextStageBtn").classList.remove("hidden");
+  const nextBtn = document.getElementById("nextStageBtn");
+  if (nextBtn) {
+    nextBtn.classList.remove("hidden");
+  }
 }
 
+// Stage 2 -> Stage 3 Transition
 function goToStage3() {
-  document.getElementById("stage2").classList.remove("active");
-  document.getElementById("stage3").classList.add("active");
+  const stage2 = document.getElementById("stage2");
+  const stage3 = document.getElementById("stage3");
+
+  stage2.classList.remove("active");
+  setTimeout(() => {
+    stage2.classList.add("hidden");
+    stage3.classList.remove("hidden");
+    setTimeout(() => stage3.classList.add("active"), 50);
+  }, 300);
 }
 
 // Interactive Love Slider Logic
@@ -112,9 +144,9 @@ function updateLoveMeter(val) {
   } else {
     if (sliderText) sliderText.innerText = `Love Level: ${val}% (1000% Perfection! Maza prem pan evdhach aahe 🎉)`;
     if (finalCard) finalCard.classList.remove("hidden");
-    
+
     if (typeof confetti === "function") {
-      confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
+      confetti({ particleCount: 60, spread: 70, origin: { y: 0.7 } });
     }
   }
 }
@@ -123,13 +155,13 @@ function updateLoveMeter(val) {
 function createBackgroundHearts() {
   const container = document.getElementById("heartsContainer");
   if (!container) return;
-  
-  for (let i = 0; i < 20; i++) {
+
+  for (let i = 0; i < 18; i++) {
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML = "❤️";
     heart.style.left = `${Math.random() * 100}%`;
-    heart.style.animationDuration = `${4 + Math.random() * 4}s`;
+    heart.style.animationDuration = `${3.5 + Math.random() * 3.5}s`;
     heart.style.animationDelay = `${Math.random() * 3}s`;
     container.appendChild(heart);
   }
