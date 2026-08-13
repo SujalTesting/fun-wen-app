@@ -1,19 +1,28 @@
+// 1. Get Boy & Girl Names dynamically from URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+
+// Get 'receiver' (Girl) or default to 'Pilla'
+const receiverName = urlParams.get('receiver') || urlParams.get('to') || 'Pilla';
+
+// Get 'sender' (Boy) or default to 'Maza'
+const senderName = urlParams.get('sender') || urlParams.get('from') || 'Maza';
+
 let dodgeCount = 0;
 let yesButtonScale = 1;
 
+// Marathi-English tease messages using the Girl's dynamic name
 const teaseMessages = [
-  "Arey re, 'No' click nahi honar! 😜",
-  "Aga Shona, evdha bhaav nako khau! 😘",
-  "Khup taagad lavli tari 'No' nahi honar! 😂",
-  "Chukun pan 'No' dabayla jashil tar button palel! 🏃‍♀️",
-  "Bas kar na pillu, Seedha 'HO' bol! ❤️"
+  `Arey re ${receiverName}, 'No' click nahi honar! 😜`,
+  `Aga ${receiverName}, evdha bhaav nako khau! 😘`,
+  `Khup taagad lavli tari 'No' nahi honar! 😂`,
+  `Chukun pan 'No' dabayla jashil tar button palel! 🏃‍♀️`,
+  `Bas kar na ${receiverName}, Seedha 'HO' bol! ❤️`
 ];
 
 // Emoji swapped on each dodge — no network request, so it can never break or 404
 const dodgeEmojis = ["🙈", "😅", "😜", "🏃‍♀️", "😂"];
 
 // --- "Love Fever" background song (Rajneesh Patel), controlled via YouTube IFrame API ---
-// Swap this ID for a different official upload any time — everything else keeps working.
 const SONG_VIDEO_ID = "7sJXzaN3RqI";
 
 let ytPlayer = null;
@@ -54,8 +63,6 @@ function startSong() {
   if (ytPlayerReady && ytPlayer) {
     ytPlayer.playVideo();
   }
-  // If the API hasn't finished loading yet, onReady() above will start it
-  // automatically because songShouldPlay is now true.
 }
 
 function stopSong() {
@@ -80,9 +87,34 @@ function toggleMusicMute() {
   }
 }
 
+// 2. Inject Dynamic Names into HTML text elements when page loads
 document.addEventListener("DOMContentLoaded", () => {
-  const noBtn = document.getElementById("noBtn");
+  // Personalize Stage 1 Text
+  const questionText = document.getElementById("questionText");
+  if (questionText) {
+    questionText.innerHTML = `Arey ${receiverName}, Will you be my Valentine? 💖`;
+  }
 
+  // Personalize Stage 2 Subtitle
+  const stage2Header = document.querySelector("#stage2 h2");
+  if (stage2Header) {
+    stage2Header.innerHTML = `Yay! ${senderName} knew you'd say 'HO', ${receiverName}! 🎉❤️`;
+  }
+
+  // Personalize Stage 3 Header
+  const stage3Header = document.querySelector("#stage3 h2");
+  if (stage3Header) {
+    stage3Header.innerHTML = `${senderName}'s Prem Inspector 🔍`;
+  }
+
+  // Personalize Final Card Text
+  const finalCardText = document.querySelector("#finalCard p");
+  if (finalCardText) {
+    finalCardText.innerHTML = `Tu ${senderName} cha saglyat aavadta manus aahes, ${receiverName}! Can't wait to see you soon! 😘`;
+  }
+
+  // Event Listeners
+  const noBtn = document.getElementById("noBtn");
   if (noBtn) {
     noBtn.addEventListener("mouseover", moveNoButton);
     noBtn.addEventListener("click", moveNoButton);
