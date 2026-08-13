@@ -35,7 +35,7 @@ function onYouTubeIframeAPIReady() {
       fs: 0,
       modestbranding: 1,
       playsinline: 1,
-      start: 35,
+      start: 27,
     },
     events: {
       onReady: () => {
