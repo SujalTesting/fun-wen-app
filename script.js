@@ -141,6 +141,59 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   createBackgroundHearts();
+  // Generator Function
+function generateAndShareLink() {
+  const senderInput = document.getElementById("senderInput");
+  const receiverInput = document.getElementById("receiverInput");
+
+  const senderVal = (senderInput && senderInput.value.trim()) ? senderInput.value.trim() : "Maza";
+  const receiverVal = (receiverInput && receiverInput.value.trim()) ? receiverInput.value.trim() : "Pilla";
+
+  // Construct absolute clean URL without prior query strings
+  const baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+  const customUrl = `${baseUrl}?sender=${encodeURIComponent(senderVal)}&receiver=${encodeURIComponent(receiverVal)}`;
+
+  const generatedUrlInput = document.getElementById("generatedUrl");
+  if (generatedUrlInput) {
+    generatedUrlInput.value = customUrl;
+  }
+
+  const shareBox = document.getElementById("shareBox");
+  if (shareBox) {
+    shareBox.classList.remove("hidden");
+    shareBox.style.display = "block"; // Force display
+  }
+
+  // Setup WhatsApp share button action
+  const waBtn = document.getElementById("whatsappBtn");
+  if (waBtn) {
+    const waText = `Hey ${receiverVal}, I have a special question for you... 🙈❤️\n${customUrl}`;
+    waBtn.onclick = () => {
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}`, '_blank');
+    };
+  }
+}
+
+// Separate helper to copy link to clipboard on click
+function copyGeneratedLink() {
+  const generatedUrlInput = document.getElementById("generatedUrl");
+  const copyBtn = document.getElementById("copyBtn");
+
+  if (generatedUrlInput) {
+    generatedUrlInput.select();
+    generatedUrlInput.setSelectionRange(0, 99999); // Mobile compatibility
+
+    navigator.clipboard.writeText(generatedUrlInput.value).then(() => {
+      if (copyBtn) {
+        copyBtn.innerText = "Copied! ✅";
+        setTimeout(() => { copyBtn.innerText = "Copy Link 📋"; }, 2000);
+      }
+    }).catch(() => {
+      document.execCommand("copy");
+      if (copyBtn) copyBtn.innerText = "Copied! ✅";
+    });
+  }
+}
 });
 
 // Precision dodge relative to button container
