@@ -77,7 +77,7 @@ function moveNoButton() {
 
   // Scale up "Yes" button progressively
   dodgeCount++;
-  yesButtonScale = Math.min(yesButtonScale + 0.12, 2.2); // Cap max growth scale
+  yesButtonScale = Math.min(yesButtonScale + 0.8, 1.2); // Cap max growth scale
   if (yesBtn) {
     yesBtn.style.transform = `scale(${yesButtonScale})`;
   }
