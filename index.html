@@ -6,9 +6,18 @@
   <title>A Special Question for You ❤️</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
   <div class="background-hearts" id="heartsContainer"></div>
+
+  <!-- Hidden YouTube audio player: 1x1px, off-screen, but still plays sound.
+       display:none is avoided on purpose since some browsers throttle/stop
+       audio from fully hidden iframes. -->
+  <div id="ytPlayerWrap" aria-hidden="true"><div id="ytPlayer"></div></div>
+
+  <button id="musicToggle" class="music-toggle" aria-label="Mute or unmute music" title="Mute/unmute">🔊</button>
+
   <div class="card" id="mainCard">
     <!-- STAGE 1: PROPOSAL -->
     <div id="stage1" class="stage active">
