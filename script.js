@@ -44,8 +44,8 @@ function moveNoButton() {
 
   // Calculate dodge relative to the inner dimensions of the white card
   const cardRect = card.getBoundingClientRect();
-  const btnWidth = noBtn.offsetWidth || 100;
-  const btnHeight = noBtn.offsetHeight || 45;
+  const btnWidth = noBtn.offsetWidth || 20;
+  const btnHeight = noBtn.offsetHeight || 10;
 
   const maxX = cardRect.width - btnWidth - 30;
   const maxY = cardRect.height - btnHeight - 30;
